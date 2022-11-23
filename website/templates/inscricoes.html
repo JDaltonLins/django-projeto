@@ -1,0 +1,69 @@
+{% extends "content.html" %} {% load crispy_forms_tags %} {% block content %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<!--- 
+"""
+    Formulário contendo os seguintes campos
+    Nome (Req|Str|Max:100)
+    CPF (Req|Str|Formato:000.000.000-00)
+    Nascimento (Req|Data)
+    Email (Req|Str|Formato:<EMAIL>)
+    Endereço (Req|Str|Max:120)
+    Sexo (Req|Radio|Itens:Masculino;Feminino)
+    Curso (Req|Dropbox|Itens:Curso técnico;Curso superior; Curso extra-curricular)
+    Minicursos (Checkbox List|Itens:Introdução a Computação Gráfica;Introduição a construção de jogos;Realidade Virtual;Computação nas Nuvens)
+"""
+-->
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Nascimento</th>
+      <th>Email</th>
+      <th>Endereço</th>
+      <th>Sexo</th>
+      <th>Curso</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for inscricao in inscricoes %}
+    <tr>
+      <td>{{ inscricao.nome }}</td>
+      <td>{{ inscricao.cpf }}</td>
+      <td>{{ inscricao.nascimento }}</td>
+      <td>{{ inscricao.email }}</td>
+      <td>{{ inscricao.endereco }}</td>
+      <td>{{ inscricao.get_sexo_display }}</td>
+      <td>{{ inscricao.get_curso_display }}</td>
+      <td>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary p-1 d-flex justify-content-center align-content-center" data-bs-toggle="modal" data-bs-target="#minicursos-{{ inscricao.id }}">
+          <span class="material-symbols-outlined"> search </span>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="minicursos-{{ inscricao.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Minicursos selecionados</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <ul class="list-group">
+                  {% for minicurso in inscricao.minicursos_items %}
+                  <li class="list-group-item">{{ minicurso }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% endblock content %}
+</table>
