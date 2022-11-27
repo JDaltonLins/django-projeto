@@ -32,7 +32,7 @@ class Inscricao(models.Model):
     minicursos = models.IntegerField()
 
     def minicursos_items(self):
-        return [c[1] for c in Inscricao.MINICURSOS_CHOICES if c[0] & self.minicursos]
+        return [item[1] for item in Inscricao.MINICURSOS_CHOICES if item[0] & self.minicursos]
 
     class Meta:
         verbose_name = 'Inscrição'

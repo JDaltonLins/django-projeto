@@ -1,11 +1,17 @@
-{% extends "content.html" %} 
+{% extends "content.html" %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 
-<form class="form" method="post">
-    {% crispy form %} 
+<form class="form col-8 mx-auto bg-dark rounded p-3 text-white" method="post">
+    <p class="text-danger text-center pb-1 pt-3">Inscrição Minicurso - ETAL</p>
+    {% crispy form %}
     {% csrf_token %}
 </form>
+
+<!--- Adiciona o script jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--- Adiciona o script para mascará -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 {% endblock content %}

@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-from crispy_forms.layout import Layout, Div, Field
+from crispy_forms.layout import Layout, Submit
+from crispy_forms.bootstrap import InlineRadios
 
 from website.models import Inscricao
 from functools import reduce
@@ -21,32 +21,34 @@ from functools import reduce
 
 class CursoForm(forms.ModelForm):
     nome = forms.CharField(label='Nome', max_length=100,
-                           widget=forms.TextInput(attrs={'form_style': 'inline'}))
-    cpf = forms.CharField(label='CPF', max_length=14)
-    nascimento = forms.DateField(label='Nascimento')
-    email = forms.EmailField(label='Email')
-    endereco = forms.CharField(label='Endereço', max_length=120)
+                           widget=forms.TextInput(attrs={'form_style': 'inline'}),  required=True)
+    # Adiciona uma mascará para o campo CPF
+    cpf = forms.CharField(label='CPF', max_length=14,
+                          min_length=14, required=True, widget=forms.TextInput(attrs={'form_style': 'inline', 'data-mask': '000.000.000-00'}))
+    nascimento = forms.DateField(label='Nascimento', required=True)
+    email = forms.EmailField(label='Email', required=True)
+    endereco = forms.CharField(label='Endereço', max_length=120, required=True)
     sexo = forms.ChoiceField(
-        label='Sexo', choices=Inscricao.SEXO_CHOICES, widget=forms.RadioSelect)
-    curso = forms.ChoiceField(label='Curso', choices=Inscricao.CURSO_CHOICES)
+        label='Sexo', choices=Inscricao.SEXO_CHOICES, widget=forms.RadioSelect, required=True)
+    curso = forms.ChoiceField(
+        label='Curso', choices=Inscricao.CURSO_CHOICES, required=True)
     minicursos = forms.MultipleChoiceField(
-        label='Minicursos', choices=Inscricao.MINICURSOS_CHOICES, widget=forms.CheckboxSelectMultiple)
+        label='Minicursos', choices=Inscricao.MINICURSOS_CHOICES, widget=forms.CheckboxSelectMultiple, required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_class = 'f d-flex flex-column'
-        self.helper.form_style = 'inline'
-        self.helper.form_group_wrapper_class = 'mb-1 d-flex flex-row'
+        self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+
         self.helper.layout = Layout(
-            Div(Field('nome', wrapper_class="w-100", css_class=""), Field('cpf',
-                wrapper_class="w-100"), css_class='d-flex flex-row col'),
+            'nome',
+            'cpf',
             'email',
             'nascimento',
             'endereco',
-            'sexo',
+            InlineRadios('sexo'),
             'curso',
             'minicursos',
             Submit('submit', 'Enviar', css_class='btn btn-primary align-self-end')

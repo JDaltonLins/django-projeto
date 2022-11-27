@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-oo34685zh@(b)%f*ldk%mcby@=kond0sd40sj+&#&-s7jyz2e^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,10 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
-    'multiselectfield',
     "crispy_forms",
     "crispy_bootstrap5",
-    'cpf_field'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -113,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'Amrica/Fortaleza'
+TIME_ZONE = 'America/Fortaleza'
 
 USE_I18N = True
 

@@ -1,5 +1,6 @@
 {% extends "content.html" %} {% load crispy_forms_tags %} {% block content %}
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <!--- 
 """
     Formulário contendo os seguintes campos
@@ -13,7 +14,7 @@
     Minicursos (Checkbox List|Itens:Introdução a Computação Gráfica;Introduição a construção de jogos;Realidade Virtual;Computação nas Nuvens)
 """
 -->
-<table class="table">
+<table class="table text-white">
   <thead>
     <tr>
       <th>Nome</th>
@@ -39,14 +40,16 @@
       <td>{{ inscricao.get_curso_display }}</td>
       <td>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary p-1 d-flex justify-content-center align-content-center" data-bs-toggle="modal" data-bs-target="#minicursos-{{ inscricao.id }}">
+        <button type="button" class="btn btn-primary p-1 d-flex justify-content-center align-content-center"
+          data-bs-toggle="modal" data-bs-target="#minicursos-{{ inscricao.id }}">
           <span class="material-symbols-outlined"> search </span>
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="minicursos-{{ inscricao.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade text-white" id="minicursos-{{ inscricao.id }}" tabindex="-1"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-dark">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Minicursos selecionados</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -54,7 +57,7 @@
               <div class="modal-body">
                 <ul class="list-group">
                   {% for minicurso in inscricao.minicursos_items %}
-                  <li class="list-group-item">{{ minicurso }}</li>
+                  <li class="list-group-item bg-dark text-white">{{ minicurso }}</li>
                   {% endfor %}
                 </ul>
               </div>
