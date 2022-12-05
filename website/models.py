@@ -17,7 +17,7 @@ class Inscricao(models.Model):
 
     MINICURSOS_CHOICES = (
         (1, 'Introdução a Computação Gráfica'),
-        (2, 'Introduição a construção de jogos'),
+        (2, 'Introdução a Construção de Jogos'),
         (4, 'Realidade Virtual'),
         (8, 'Computação nas Nuvens')
     )
